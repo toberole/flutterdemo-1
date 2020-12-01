@@ -12,16 +12,14 @@ import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.android.FlutterSurfaceView;
 import io.flutter.embedding.android.FlutterTextureView;
 
-public class AndroidFlutterActivity extends FlutterActivity {
-
+public class CacheFlutterEngineActivity extends FlutterActivity {
     static final String EXTRA_CACHED_ENGINE_ID = "cached_engine_id";
-    static final String EXTRA_ROUTE = "extra_route";
     static final String EXTRA_DESTROY_ENGINE_WITH_ACTIVITY = "destroy_engine_with_activity";
 
     public static void open(Context context, String route) {
-        Intent intent = new Intent(context, AndroidFlutterActivity.class)
-                .putExtra(EXTRA_CACHED_ENGINE_ID, FlutterTools.DEFAULT_CACHE_ENGINE_ID)
-                .putExtra(EXTRA_ROUTE, route)
+        Intent intent = new Intent(context, CacheFlutterEngineActivity.class)
+                .putExtra(EXTRA_CACHED_ENGINE_ID, FlutterEngineCacheManager.DEFAULT_CACHE_ENGINE_ID)
+                .putExtra(FlutterEngineCacheManager.FLUTTER_PAGE_ROUTE, route)
                 .putExtra(EXTRA_DESTROY_ENGINE_WITH_ACTIVITY, false); // Activity 销毁时保留 FlutterEngine
         context.startActivity(intent);
     }
@@ -84,7 +82,7 @@ public class AndroidFlutterActivity extends FlutterActivity {
     public void onFlutterUiDisplayed() {
         super.onFlutterUiDisplayed();
         // 设置 Flutter 界面入口，注意不要在 onCreate 方法中调用，否则Flutter 入口不会更新。
-        String route = getIntent().getStringExtra(EXTRA_ROUTE);
-        FlutterTools.setInitRoute(route);
+        String route = getIntent().getStringExtra(FlutterEngineCacheManager.FLUTTER_PAGE_ROUTE);
+        FlutterEngineCacheManager.getInstance().setInitRoute(route);
     }
 }

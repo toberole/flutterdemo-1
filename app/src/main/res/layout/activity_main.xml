@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Button
@@ -20,4 +20,20 @@
         android:layout_height="wrap_content"
         android:text="btn2"
         android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_FragmentActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FragmentActivity"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_Fragment1Activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fragment1Activity"
+        android:textAllCaps="false" />
+
+
 </LinearLayout>

@@ -10,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Flutterdemo1">
-        <activity android:name=".base.AndroidFlutterActivity" />
-
+        <activity android:name=".activity.Fragment1Activity" />
+        <activity android:name=".activity.FragmentActivity" />
+        <activity android:name=".base.CacheFlutterEngineActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

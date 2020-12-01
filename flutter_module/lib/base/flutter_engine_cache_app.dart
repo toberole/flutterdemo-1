@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_module/test/page_a.dart';
 import 'package:flutter_module/test/page_b.dart';
+import 'package:flutter_module/test/page_fragment.dart';
 
 class FlutterEngineCacheApp extends StatefulWidget {
   @override
@@ -43,6 +44,9 @@ class _FlutterEngineCacheAppState extends State<FlutterEngineCacheApp> {
         break;
       case '/page_b':
         _initRoute = PageB();
+        break;
+      case '/page_fragment':
+        _initRoute = PageFragment();
         break;
       default:
         _initRoute = DefaultHomePage();
