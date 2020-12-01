@@ -6,7 +6,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.zw.flutterdemo1.activity.Fragment1Activity
 import com.zw.flutterdemo1.activity.FragmentActivity
+import com.zw.flutterdemo1.activity.NativeActivity
+import com.zw.flutterdemo1.activity.TextureActivity
 import com.zw.flutterdemo1.base.CacheFlutterEngineActivity
+import com.zw.flutterdemo1.base.FlutterEngineCacheManager
+import io.flutter.embedding.engine.renderer.FlutterRenderer
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -18,13 +22,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        test()
         btn1.setOnClickListener(this)
         btn2.setOnClickListener(this)
         btn_FragmentActivity.setOnClickListener(this)
         btn_Fragment1Activity.setOnClickListener(this)
-
-
+        btn_initEngine.setOnClickListener(this)
+        btn_destroyEngine.setOnClickListener(this)
+        btn_NativeActivity.setOnClickListener(this)
+        btn_TextureActivity.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -32,6 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn1 -> {
                 CacheFlutterEngineActivity.open(this, ROUTE_PAGE_A)
             }
+
             R.id.btn2 -> {
                 CacheFlutterEngineActivity.open(this, ROUTE_PAGE_B)
             }
@@ -45,7 +52,28 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val intent = Intent(this, Fragment1Activity::class.java)
                 startActivity(intent)
             }
+
+            R.id.btn_initEngine -> {
+                FlutterEngineCacheManager.getInstance().init(this.applicationContext)
+            }
+
+            R.id.btn_destroyEngine -> {
+                FlutterEngineCacheManager.getInstance().destroyEngine()
+            }
+
+            R.id.btn_NativeActivity -> {
+                val intent = Intent(this, NativeActivity::class.java)
+                startActivity(intent)
+            }
+
+            R.id.btn_TextureActivity -> {
+                val intent = Intent(this, TextureActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
+    private fun test() {
+
+    }
 }

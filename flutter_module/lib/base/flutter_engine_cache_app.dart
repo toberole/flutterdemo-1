@@ -10,12 +10,15 @@ class FlutterEngineCacheApp extends StatefulWidget {
 }
 
 class _FlutterEngineCacheAppState extends State<FlutterEngineCacheApp> {
-  MethodChannel _methodChannel = MethodChannel('com.cache_engine/method_channel');
-  Widget _initRoute = DefaultHomePage();
+  MethodChannel _methodChannel =
+      MethodChannel('com.cache_engine/set_initroute_method_channel');
+  
+  Widget _page = DefaultHomePage();
 
   @override
   void initState() {
     super.initState();
+    print('FlutterEngineCacheApp#initState');
     _methodChannel.setMethodCallHandler((call) async {
       switch (call.method) {
         case 'setInitRoute':
@@ -26,6 +29,14 @@ class _FlutterEngineCacheAppState extends State<FlutterEngineCacheApp> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    print('FlutterEngineCacheApp#dispose');
+  }
+
+
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'FlutterEngineCacheApp',
@@ -33,23 +44,23 @@ class _FlutterEngineCacheAppState extends State<FlutterEngineCacheApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: _initRoute,
+      home: _page,
     );
   }
 
   void _handleInitRouteMethodCall(MethodCall call) async {
     switch (call.arguments) {
       case '/page_a':
-        _initRoute = PageA();
+        _page = PageA();
         break;
       case '/page_b':
-        _initRoute = PageB();
+        _page = PageB();
         break;
       case '/page_fragment':
-        _initRoute = PageFragment();
+        _page = PageFragment();
         break;
       default:
-        _initRoute = DefaultHomePage();
+        _page = DefaultHomePage();
         break;
     }
     setState(() {});
