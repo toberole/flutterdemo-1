@@ -62,7 +62,6 @@ class TextureActivity : FlutterActivity() {
         val textureEntry = textures.createSurfaceTexture()
         textureId = textureEntry.id()
         Log.e(TAG, "init textureId: $textureId")
-
         val surfaceTexture = textureEntry.surfaceTexture()
         surface = Surface(surfaceTexture)
 
@@ -102,22 +101,32 @@ class TextureActivity : FlutterActivity() {
         val paint = Paint()
         paint.setAntiAlias(false) //设置画笔为无锯齿
         paint.setColor(Color.RED) //设置画笔颜色
+        window.decorView.postDelayed({
+            var canvas = surface.lockCanvas(rect)
+            Log.i(TAG, "drawUI ......")
 
-        Thread {
-            Thread.sleep(1000)
-            while (!b) {
-                // 渲染太快容易异常
-                Thread.sleep(5)
-                var canvas = surface.lockCanvas(rect)
-                Log.i(TAG, "drawUI ......")
+            canvas.drawColor(Color.WHITE) //白色背景
+            paint.setStrokeWidth(3.0.toFloat()) //线宽
+            paint.setStyle(Paint.Style.STROKE) //空心效果
+            canvas.drawCircle(150F, 350F, 50F, paint) //绘制圆形
 
-                canvas.drawColor(Color.WHITE) //白色背景
-                paint.setStrokeWidth(3.0.toFloat()) //线宽
-                paint.setStyle(Paint.Style.STROKE) //空心效果
-                canvas.drawCircle(150F, 350F, 50F, paint) //绘制圆形
-
-                surface.unlockCanvasAndPost(canvas)
-            }
-        }.start()
+            surface.unlockCanvasAndPost(canvas)
+        }, 1000)
+//        Thread {
+//            Thread.sleep(1000)
+//            while (!b) {
+//                // 渲染太快容易异常
+//                Thread.sleep(5)
+//                var canvas = surface.lockCanvas(rect)
+//                Log.i(TAG, "drawUI ......")
+//
+//                canvas.drawColor(Color.WHITE) //白色背景
+//                paint.setStrokeWidth(3.0.toFloat()) //线宽
+//                paint.setStyle(Paint.Style.STROKE) //空心效果
+//                canvas.drawCircle(150F, 350F, 50F, paint) //绘制圆形
+//
+//                surface.unlockCanvasAndPost(canvas)
+//            }
+//        }.start()
     }
 }

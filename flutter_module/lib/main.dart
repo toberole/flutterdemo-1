@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'base/flutter_engine_cache_app.dart';
@@ -11,8 +10,8 @@ void main() {
 
   if (defaultRouteName == 'FlutterEngineCacheApp') {
     return runApp(FlutterEngineCacheApp());
-  }else{
-    if("TextureActivity" == defaultRouteName){
+  } else {
+    if ("TextureActivity" == defaultRouteName) {
       return runApp(TexturePage());
     }
   }
